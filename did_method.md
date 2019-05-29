@@ -18,12 +18,19 @@ The name string that shall identify this DID method is: omn
 
 ## OmniOne DID Format
 
-omn-did   = "did:omn:" id-string 
-id-string = 1* idchar
-idchar    = 1-9 / A-H / J-N / P-Z / a-k / m-z 
+ALPHA and DIGIT used in "omn-identifier" are the definition of Core Rules in [RFC5234].
 
+```
+omn-did        = "did:omn:" omn-identifier
+omn-identifier = ALPHA / DIGIT
+```
+
+```
 Example
 did:omn:4EFNaYeA9hDp6F55JAB38EFtNcYEbbM9nwKr
+```
+
+
 
 ## Operation
 OmniOne DID (CRUD) operations are provided in RESTful API format.
@@ -234,51 +241,31 @@ example output data
 }
 ```
 
-### Delete
-To delete did_document ,the input value must be as following.
-The input has a signature including with nonce.
-It returns "true". if successfully delete.
-```
-endport : /did_delete
-input : did,proof
-output : did_document
-```
-
-example input data
-
-```
-{  
-   "id":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn",
-   "proof":{  
-      "type":" EcdsaKoblitzSignature2016",
-      "created":"2018-08-02T16:01:10Z",
-      "nonce":"d235qsd",
-      "creator":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn#keys-1",
-      "signatureValue":"d976...=="
-   }
-}
-```
-
-example output data	
-
-```
-{
-"result": true,
-"message" : "did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn deleted"
-}
-```
 # Security Considerations
-## TODO
 ### Replay Attacks 
 To prevent a replay attact a did proof has to have random nonce value. 
 In decentralized network or smart contract code could not generate reliable random number.(oracle problem)
 To solve this issue , we store the nonce value that was used , and check if the value already used .
+
 ### Non-repudiation
+DID owner makes proof(digital  signature) with the private key and the signature is verified with a public key that is paired with the private key in the blockchain. With this process non-repudiation is satisfied.
+
 ### Providing Traffic Security
+The OmniOne Network uses TLS protocol to provide traffic security.
+
+### Storing Data
+OmniOne currently stores only the following data on the blockchain.
+- DID Document which includes public keys
+- signature values which is used to verify the proof of the verifiable claim
+
+### Consensus Algorithm
+To ensure the stability of blockchain nodes, OmniOne uses a signature-based Delegated Proof of Stake consensus algorithm and BFT (2/3 or more agreement)
 
 # Privacy Considerations
-## TODO
 OmniOne blockchain and DID Documents contain no PII(Personally-Identifiable Information).
+OmniOne currently stores only the following data on the blockchain.
+- DID Document which includes public keys
+- signature values which is used to verify the proof of the verifiable claim
 
 # References
 [1]. W3C Decentralized Identifiers (DIDs) v0.11, https://w3c-ccg.github.io/did-spec/.
