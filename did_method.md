@@ -260,7 +260,7 @@ It returns "true", if successfully delete.
 
 example input data
 
-```
+```json
 {  
 "id":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn",
 "proof":{  
