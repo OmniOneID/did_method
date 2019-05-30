@@ -241,31 +241,73 @@ example output data
 }
 ```
 
+### Delete
+To delete did_document, the input value must be as following.
+The input has a signature including a nonce. 
+
+```
+endport : /did_delete
+input : did with proof
+output : result
+```
+
+After blockchain verify the proof of the delete operation with the public key, 
+the did_document(include public keys) is deleted from the blockchain and the
+did can no longer be used. And this operation can not be undone.
+
+It returns "true", if successfully delete.
+
+
+example input data
+
+```
+{  
+"id":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn",
+"proof":{  
+"type":" EcdsaKoblitzSignature2016",
+"created":"2018-08-02T16:01:10Z",
+"nonce":"d235qsd",
+"creator":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn#keys-1",
+"signatureValue":"d976.....=="
+}
+}
+```
+
+example output data
+
+```
+{  
+"result": true,
+"message": "did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn deleted"
+}
+```
+
+
 # Security Considerations
 ### Replay Attacks 
-To prevent a replay attact a did proof has to have random nonce value. 
+In order to prevent a replay attact a did proof has to have random nonce value. 
 In decentralized network or smart contract code could not generate reliable random number.(oracle problem)
-To solve this issue , we store the nonce value that was used , and check if the value already used .
+To solve this issue , we store the nonce value that was used , and check if the value has already been used .
 
 ### Non-repudiation
-DID owner makes proof(digital  signature) with the private key and the signature is verified with a public key that is paired with the private key in the blockchain. With this process non-repudiation is satisfied.
+The DID owner generates proof(digital  signature) with the private key and the signature is verified with a public key that is paired with the private key in the blockchain. With this process non-repudiation is satisfied.
 
 ### Providing Traffic Security
 The OmniOne Network uses TLS protocol to provide traffic security.
 
 ### Storing Data
-OmniOne currently stores only the following data on the blockchain.
+Currently, OmniOne only stores the following data on the blockchain.
 - DID Document which includes public keys
-- signature values which is used to verify the proof of the verifiable claim
+- signature values, which are used to verify the proof of the verifiable claim
 
 ### Consensus Algorithm
-To ensure the stability of blockchain nodes, OmniOne uses a signature-based Delegated Proof of Stake consensus algorithm and BFT (2/3 or more agreement)
+In order to ensure the stability of blockchain nodes, OmniOne uses a signature-based Delegated Proof of Stake consensus algorithm and BFT (2/3 or more agreements)
 
 # Privacy Considerations
 OmniOne blockchain and DID Documents contain no PII(Personally-Identifiable Information).
-OmniOne currently stores only the following data on the blockchain.
-- DID Document which includes public keys
-- signature values which is used to verify the proof of the verifiable claim
+Currently OmniOne  only stores the following data on the blockchain.
+- DID Documents which includes public keys
+- signature values which are used to verify the proof of the verifiable claim
 
 # References
 [1]. W3C Decentralized Identifiers (DIDs) v0.11, https://w3c-ccg.github.io/did-spec/.
