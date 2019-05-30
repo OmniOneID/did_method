@@ -243,20 +243,19 @@ example output data
 
 ### Delete
 To delete did_document, the input value must be as following.
-The input has a signature including a nonce. 
+The input has a signature including a nonce.  
+
+After blockchain verify the proof of the delete operation with the public key, 
+the did_document(include public keys) is deleted from the blockchain and the
+did can no longer be used. And this operation can not be undone.
+
+It returns "true", if all processes are successfully done.
 
 ```
 endport : /did_delete
 input : did with proof
 output : result
 ```
-
-After blockchain verify the proof of the delete operation with the public key, 
-the did_document(include public keys) is deleted from the blockchain and the
-did can no longer be used. And this operation can not be undone.
-
-It returns "true", if successfully delete.
-
 
 example input data
 
@@ -281,7 +280,6 @@ example output data
 "message": "did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn deleted"
 }
 ```
-
 
 # Security Considerations
 ### Replay Attacks 
