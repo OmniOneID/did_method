@@ -260,16 +260,16 @@ It returns "true", if successfully delete.
 
 example input data
 
-```json
+```
 {  
 "id":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn",
 "proof":{  
-"type":" EcdsaKoblitzSignature2016",
-"created":"2018-08-02T16:01:10Z",
-"nonce":"d235qsd",
-"creator":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn#keys-1",
-"signatureValue":"d976.....=="
-}
+    "type":" EcdsaKoblitzSignature2016",
+    "created":"2018-08-02T16:01:10Z",
+    "nonce":"d235qsd",
+    "creator":"did:omn:7V2FnzCykod7aK9eMBEtKEdyfxSwn#keys-1",
+    "signatureValue":"d976.....=="
+    }
 }
 ```
 
